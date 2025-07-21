@@ -8,21 +8,18 @@ if not playSoundEvent then
 end
 
 playSoundEvent.OnServerEvent:Connect(function(player, soundId)
-    if not soundId or soundId == "" then
-        return -- boşsa hiçbir şey yapma
-    end
+    if not soundId or soundId == "" then return end
 
-    -- Yeni ses objesi yarat
     local sound = Instance.new("Sound")
     sound.Name = "GlobalMusic"
     sound.SoundId = "rbxassetid://" .. soundId
     sound.Volume = 1
-    sound.Looped = false -- ardarda çalabilmesi için loop yok
+    sound.Looped = false
     sound.Parent = workspace
     sound:Play()
 
-    -- Ses bitince yok et
     sound.Ended:Connect(function()
         sound:Destroy()
     end)
 end)
+
